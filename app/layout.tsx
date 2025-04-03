@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   description:
     "안상영과 김민선의 결혼식에 초대합니다. 2025년 5월 17일 토요일 오후 4시, 논현2동 성당",
   openGraph: {
-    title: "안상영과 김민선의 결혼식에 초대합니다",
+    title: "청첩장",
     description:
       "안상영과 김민선의 결혼식에 초대합니다. 2025년 5월 17일 토요일 오후 4시, 논현2동 성당",
     siteName: "청첩장",
