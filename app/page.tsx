@@ -1,103 +1,154 @@
+"use client";
+
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { motion, useInView } from "framer-motion";
 import Image from "next/image";
+import { useRef } from "react";
+
+const GALLERY_IMAGES = [
+  "/images/1.jpg",
+  "/images/2.jpg",
+  "/images/3.jpg",
+  "/images/4.jpg",
+  "/images/5.jpg",
+  "/images/6.jpg",
+  "/images/7.jpg",
+  "/images/8.jpg",
+  "/images/9.jpg",
+  "/images/10.jpg",
+  "/images/11.jpg",
+];
+
+function FadeInImage({ src, index }: { src: string; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, {
+    once: true,
+    margin: "0px 0px -200px 0px",
+    amount: 0.1,
+  });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 100 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
+      transition={{
+        y: {
+          duration: 2.2,
+          ease: [0.16, 1, 0.3, 1],
+        },
+        opacity: {
+          duration: 2.8,
+          ease: [0.25, 0.1, 0.2, 0.94],
+        },
+        delay: index * 0.12,
+      }}
+      style={{
+        marginTop: `var(--image-${index}-top-margin, 0)`,
+        marginBottom: `var(--image-${index}-bottom-margin, 0)`,
+        marginLeft: `var(--image-${index}-left-margin, 0)`,
+        marginRight: `var(--image-${index}-right-margin, 0)`,
+        width: `var(--image-${index}-width, 100%)`,
+      }}
+      className="relative w-full h-full overflow-hidden"
+    >
+      <Image
+        src={src}
+        alt={`Wedding photo ${index + 1}`}
+        width={1600}
+        height={2400}
+        className="object-cover"
+      />
+    </motion.div>
+  );
+}
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+    <div className="relative w-full max-w-[430px] mx-auto min-h-screen bg-white  break-keep">
+      {/* Hero Section with Fixed Background */}
+
+      <div className="fixed top-0 left-0 right-0 h-screen max-w-[430px] mx-auto flex items-center justify-center">
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
+          src="/images/home.png"
+          alt="Wedding invitation hero image"
+          className="object-cover w-[80vw]"
+          width={1963}
+          height={3082}
           priority
         />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+      </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Content Section that overlays the hero image on scroll */}
+      <div className="relative min-h-screen flex flex-col">
+        {/* Spacer to push content below hero */}
+        <div className="h-screen" />
+
+        {/* Text Content */}
+        <div className="relative bg-white text-black  pt-32 pb-20 flex flex-col items-center">
+          <div className="my-16 mb-56  max-w-2xl mx-auto">
+            <p className="text-lg leading-[2.5] whitespace-pre-line ">
+              서로를 알아가는 일은 사랑이 되고 <br />
+              서로를 지켜내는 일은 삶이 되었습니다. <br />
+              함께 살아가는 시간 속에서 <br />
+              조금씩 서로를 닮아가려 합니다. <br />그 시작에 함께해 주세요.
+              <br />
+              <br />
+              신랑 안상영, 신부 김민선 드림
+            </p>
+            <p></p>
+
+            <div className="flex flex-col space-y-4 mt-96 mb-16 text-lg">
+              <p className="mt-8">2025년 5월 17일 토요일 오후 4시</p>
+              <Drawer>
+                <DrawerTrigger asChild>
+                  <button className="text-left hover:underline">
+                    논현2동 성당 ↗
+                  </button>
+                </DrawerTrigger>
+                <DrawerContent>
+                  <div className="mx-auto w-full max-w-lg">
+                    <DrawerHeader>
+                      <DrawerTitle className="text-center">
+                        논현2동 성당
+                      </DrawerTitle>
+                    </DrawerHeader>
+                    <div className="p-4 pb-8 space-y-4">
+                      <div className="text-center text-sm">
+                        서울특별시 강남구 선릉로145길 17
+                      </div>
+                      <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.451169021161!2d127.035835276452!3d37.52086067205044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca38a210578b3%3A0x2527cc31a9067eae!2z7LKc7KO86rWQIOuFvO2YhDLrj5kg7ISx64u5!5e0!3m2!1sko!2skr!4v1743637969057!5m2!1sko!2skr"
+                        width="100%"
+                        height="450"
+                        style={{ border: 0 }}
+                        allowFullScreen
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                      />
+                    </div>
+                  </div>
+                </DrawerContent>
+              </Drawer>
+              <p>교통 및 주차 안내 ↗</p>
+            </div>
+          </div>
+
+          {/* Image Gallery */}
+          <div className="mt-16 w-full">
+            {GALLERY_IMAGES.map((src, index) => (
+              <FadeInImage key={src} src={src} index={index} />
+            ))}
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <p className="text-lg leading-[2.5] text-right  mr-12 mb-12">마음 전하기↗</p>
+      </div>
     </div>
   );
 }
