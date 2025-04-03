@@ -72,7 +72,13 @@ function FadeInImage({ src, index }: { src: string; index: number }) {
 }
 
 // FadeInText 컴포넌트 추가
-function FadeInText({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+function FadeInText({
+  children,
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, {
     once: true,
@@ -102,15 +108,15 @@ function FadeInText({ children, delay = 0 }: { children: React.ReactNode; delay?
 }
 
 // 계좌 정보 컴포넌트
-function AccountInfo({ 
-  label, 
-  bank, 
-  accountNumber, 
-  holder 
-}: { 
-  label: string; 
-  bank: string; 
-  accountNumber: string; 
+function AccountInfo({
+  label,
+  bank,
+  accountNumber,
+  holder,
+}: {
+  label: string;
+  bank: string;
+  accountNumber: string;
   holder: string;
 }) {
   const [copied, setCopied] = useState(false);
@@ -131,11 +137,11 @@ function AccountInfo({
           <div className="text-lg font-medium">{accountNumber}</div>
           <div className="text-sm text-gray-700">{holder}</div>
         </div>
-        <button 
+        <button
           onClick={copyToClipboard}
           className="px-3 py-2 rounded bg-gray-200 hover:bg-gray-300 transition-colors"
         >
-          {copied ? '복사됨' : '복사'}
+          {copied ? "복사됨" : "복사"}
         </button>
       </div>
     </div>
@@ -163,9 +169,9 @@ export default function Home() {
 
   // 전체 페이지 가로 스크롤 방지
   useEffect(() => {
-    document.body.style.overflowX = 'hidden';
+    document.body.style.overflowX = "hidden";
     return () => {
-      document.body.style.overflowX = '';
+      document.body.style.overflowX = "";
     };
   }, []);
 
@@ -196,7 +202,7 @@ export default function Home() {
                 조금씩 서로를 닮아가려 합니다. <br />그 시작에 함께해 주세요.
               </p>
             </FadeInText>
-            
+
             <FadeInText delay={0.6}>
               <p className="text-lg leading-[2.5] whitespace-pre-line mt-6">
                 신랑 안상영, 신부 김민선 드림
@@ -239,6 +245,17 @@ export default function Home() {
                   </DrawerContent>
                 </Drawer>
               </FadeInText>
+              <FadeInText delay={0.4}>
+                <div className="mt-8 text-sm flex-col space-y-2 leading-[2]">
+                  <p>
+                    * 주차공간이 협소하오니 가급적 대중교통을 이용해 주기시
+                    바랍니다.
+                  </p>
+                  <p>
+                    * 성당은 종교시설인 관계로 화환반입이 금지되오니 양해 부탁드립니다.
+                  </p>
+                </div>
+              </FadeInText>
             </div>
           </div>
 
@@ -249,7 +266,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-        
+
         {/* 마음 전하기 버튼 영역 */}
         <div className="w-full">
           <div className="relative w-full max-w-[430px] mx-auto">
@@ -272,19 +289,19 @@ export default function Home() {
                         <div className="text-center text-sm mb-6">
                           축하의 마음을 전해주셔서 감사합니다
                         </div>
-                        
-                        <AccountInfo 
-                          label="신랑측 계좌번호" 
-                          bank="신한은행" 
-                          accountNumber="110-305-119429" 
-                          holder="안상영" 
+
+                        <AccountInfo
+                          label="신랑측 계좌번호"
+                          bank="신한은행"
+                          accountNumber="110-305-119429"
+                          holder="안상영"
                         />
-                        
-                        <AccountInfo 
-                          label="신부측 계좌번호" 
-                          bank="국민은행" 
-                          accountNumber="424002-01-010947" 
-                          holder="이희정" 
+
+                        <AccountInfo
+                          label="신부측 계좌번호"
+                          bank="국민은행"
+                          accountNumber="424002-01-010947"
+                          holder="이희정"
                         />
                       </div>
                       <DrawerFooter>
