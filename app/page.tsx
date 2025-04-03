@@ -2,7 +2,9 @@
 
 import {
   Drawer,
+  DrawerClose,
   DrawerContent,
+  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -56,16 +58,57 @@ function FadeInImage({ src, index }: { src: string; index: number }) {
         marginRight: `var(--image-${index}-right-margin, 0)`,
         width: `var(--image-${index}-width, 100%)`,
       }}
-      className="relative w-full overflow-hidden"
+      className="relative w-full overflow-visible"
     >
       <Image
         src={src}
         alt={`Wedding photo ${index + 1}`}
         width={1600}
         height={2400}
-        className="object-cover w-full h-auto"
+        className="object-cover w-full h-auto max-w-full"
       />
     </motion.div>
+  );
+}
+
+// 계좌 정보 컴포넌트
+function AccountInfo({ 
+  label, 
+  bank, 
+  accountNumber, 
+  holder 
+}: { 
+  label: string; 
+  bank: string; 
+  accountNumber: string; 
+  holder: string;
+}) {
+  const [copied, setCopied] = useState(false);
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(accountNumber).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
+  return (
+    <div className="p-4 bg-gray-50 rounded-lg mb-4">
+      <div className="mb-2 font-semibold">{label}</div>
+      <div className="flex justify-between items-center">
+        <div>
+          <div className="text-sm text-gray-700">{bank}</div>
+          <div className="text-lg font-medium">{accountNumber}</div>
+          <div className="text-sm text-gray-700">{holder}</div>
+        </div>
+        <button 
+          onClick={copyToClipboard}
+          className="px-3 py-2 rounded bg-gray-200 hover:bg-gray-300 transition-colors"
+        >
+          {copied ? '복사됨' : '복사'}
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -73,10 +116,11 @@ export default function Home() {
   // 드로어가 열리기 전 스크롤 위치 저장
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isGiftDrawerOpen, setIsGiftDrawerOpen] = useState(false);
 
   // 드로어 상태가 변경될 때 스크롤 위치 처리
   useEffect(() => {
-    if (isDrawerOpen) {
+    if (isDrawerOpen || isGiftDrawerOpen) {
       // 드로어가 열릴 때 현재 스크롤 위치 저장
       setScrollPosition(window.scrollY);
     } else if (scrollPosition > 0) {
@@ -85,7 +129,7 @@ export default function Home() {
         window.scrollTo(0, scrollPosition);
       }, 100);
     }
-  }, [isDrawerOpen, scrollPosition]);
+  }, [isDrawerOpen, isGiftDrawerOpen, scrollPosition]);
 
   // 전체 페이지 가로 스크롤 방지
   useEffect(() => {
@@ -96,9 +140,9 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative w-full max-w-[430px] mx-auto min-h-screen bg-white break-keep overflow-x-hidden">
+    <div className="relative w-full max-w-[430px] mx-auto min-h-screen bg-white break-keep">
       {/* Hero Section with Fixed Background */}
-      <div className="fixed top-0 left-0 right-0 h-screen max-w-[430px] mx-auto flex items-center justify-center overflow-hidden">
+      <div className="fixed top-0 left-0 right-0 h-screen max-w-[430px] mx-auto flex items-center justify-center">
         <Image
           src="/images/home.png"
           alt="Wedding invitation hero image"
@@ -110,12 +154,12 @@ export default function Home() {
       </div>
 
       {/* Content Section that overlays the hero image on scroll */}
-      <div className="relative min-h-screen flex flex-col overflow-x-hidden">
+      <div className="relative min-h-screen flex flex-col">
         {/* Spacer to push content below hero */}
         <div className="h-screen" />
 
         {/* Text Content */}
-        <div className="relative bg-white text-black pt-32 pb-20 flex flex-col items-center overflow-x-hidden">
+        <div className="relative bg-white text-black pt-32 pb-20 flex flex-col items-center">
           <div className="my-16 mb-56 max-w-2xl mx-auto px-4 w-full">
             <p className="text-lg leading-[2.5] whitespace-pre-line">
               서로를 알아가는 일은 사랑이 되고 <br />
@@ -165,13 +209,62 @@ export default function Home() {
           </div>
 
           {/* Image Gallery */}
-          <div className="mt-16 w-full px-4 max-w-full overflow-x-hidden">
+          <div className="mt-16 w-full px-4">
             {GALLERY_IMAGES.map((src, index) => (
               <FadeInImage key={src} src={src} index={index} />
             ))}
           </div>
         </div>
-        <p className="text-lg leading-[2.5] text-right mr-12 mb-12">마음 전하기↗</p>
+        
+        {/* 마음 전하기 버튼 영역 */}
+        <div className="w-full">
+          <div className="relative w-full max-w-[430px] mx-auto">
+            <div className="w-full flex justify-end">
+              <Drawer onOpenChange={setIsGiftDrawerOpen}>
+                <DrawerTrigger asChild>
+                  <button className="text-lg leading-[2.5] mr-12 mb-12 hover:underline cursor-pointer">
+                    마음 전하기↗
+                  </button>
+                </DrawerTrigger>
+                <DrawerContent>
+                  <div className="mx-auto w-full max-w-lg">
+                    <DrawerHeader>
+                      <DrawerTitle className="text-center text-xl">
+                        마음 전하기
+                      </DrawerTitle>
+                    </DrawerHeader>
+                    <div className="p-4 pb-8 space-y-2">
+                      <div className="text-center text-sm mb-6">
+                        축하의 마음을 전해주셔서 감사합니다
+                      </div>
+                      
+                      <AccountInfo 
+                        label="신랑측 계좌번호" 
+                        bank="신한은행" 
+                        accountNumber="110-305-119429" 
+                        holder="안상영" 
+                      />
+                      
+                      <AccountInfo 
+                        label="신부측 계좌번호" 
+                        bank="국민은행" 
+                        accountNumber="424002-01-010947" 
+                        holder="이희정" 
+                      />
+                    </div>
+                    <DrawerFooter>
+                      <DrawerClose className="w-full">
+                        <button className="w-full py-3 border border-gray-300 rounded-md hover:bg-gray-100 transition-colors">
+                          닫기
+                        </button>
+                      </DrawerClose>
+                    </DrawerFooter>
+                  </div>
+                </DrawerContent>
+              </Drawer>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
