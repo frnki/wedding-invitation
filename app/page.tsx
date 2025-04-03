@@ -192,8 +192,8 @@ export default function Home() {
       {/* Content Section */}
       <div className="w-full flex flex-col bg-white">
         {/* Text Content */}
-        <div className="bg-white text-black pt-20 pb-20 flex flex-col items-center">
-          <div className="my-16 mb-56 max-w-2xl mx-auto px-4 w-full">
+        <div className="bg-white text-black pt-20 pb-20 flex flex-col items-center ">
+          <div className="my-16 mb-56 max-w-2xl mx-auto px-16 w-full">
             <FadeInText delay={0.1}>
               <p className="text-lg leading-[2.5] whitespace-pre-line">
                 서로를 알아가는 일은 사랑이 되고 <br />
@@ -260,7 +260,7 @@ export default function Home() {
           </div>
 
           {/* Image Gallery */}
-          <div className="mt-16 w-full px-4">
+          <div className="mt-16 w-full">
             {GALLERY_IMAGES.map((src, index) => (
               <FadeInImage key={src} src={src} index={index} />
             ))}
