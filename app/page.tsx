@@ -192,8 +192,8 @@ export default function Home() {
       {/* Content Section */}
       <div className="w-full flex flex-col bg-white">
         {/* Text Content */}
-        <div className="bg-white text-black pt-20 pb-20 flex flex-col items-center ">
-          <div className="my-16 mb-56 max-w-2xl mx-auto px-16 w-full">
+        <div className="bg-white text-black pt-20 pb-12 flex flex-col items-center ">
+          <div className="my-16 mb-24 max-w-2xl mx-auto px-16 w-full">
             <FadeInText delay={0.1}>
               <p className="text-lg leading-[2.5] whitespace-pre-line">
                 서로를 알아가는 일은 사랑이 되고 <br />
@@ -209,7 +209,7 @@ export default function Home() {
               </p>
             </FadeInText>
 
-            <div className="flex flex-col space-y-4 mt-96 mb-16 text-lg">
+            <div className="flex flex-col space-y-4 mt-64 mb-16 text-lg">
               <FadeInText delay={0.2}>
                 <p className="mt-8">2025년 5월 17일 토요일 오후 4시</p>
               </FadeInText>
@@ -299,9 +299,9 @@ export default function Home() {
 
                         <AccountInfo
                           label="신부측 계좌번호"
-                          bank="국민은행"
-                          accountNumber="424002-01-010947"
-                          holder="이희정"
+                          bank="카카오뱅크"
+                          accountNumber="3333-05-0661232"
+                          holder="김민선"
                         />
                       </div>
                       <DrawerFooter>
