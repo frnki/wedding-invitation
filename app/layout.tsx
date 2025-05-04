@@ -1,50 +1,12 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Inter } from "next/font/google";
+import { Toaster } from "sonner";
 import "./globals.css";
 
-const happinessSans = localFont({
-  src: [
-    {
-      path: "../public/fonts/Happiness-Sans-Regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/Happiness-Sans-Bold.woff2",
-      weight: "700",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/Happiness-Sans-Title.woff2",
-      weight: "800",
-      style: "normal",
-    },
-  ],
-  variable: "--font-happiness-sans",
-});
+const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "청첩장",
-  description:
-    "안상영과 김민선의 결혼식에 초대합니다. 2025년 5월 17일 토요일 오후 4시, 논현2동 성당",
-  openGraph: {
-    title: "청첩장",
-    description:
-      "안상영과 김민선의 결혼식에 초대합니다. 2025년 5월 17일 토요일 오후 4시, 논현2동 성당",
-    siteName: "청첩장",
-    locale: "ko_KR",
-    type: "website",
-    images: [
-      {
-        url: "/images/og-invitation.png",
-        width: 1200,
-        height: 630,
-        alt: "청첩장",
-      },
-    ],
-  },
-  viewport:
-    "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no",
+export const metadata = {
+  title: "Minseon & Frank's After Party",
+  description: "Welcome to our after-party!",
 };
 
 export default function RootLayout({
@@ -53,11 +15,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className="overflow-x-hidden">
-      <body
-        className={`${happinessSans.variable} font-sans antialiased overflow-x-hidden`}
-      >
+    <html lang="ko">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap"
+          rel="stylesheet"
+        />
+        
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+        />
+      </head>
+      <body className={inter.className}>
         {children}
+        <Toaster position="bottom-center" />
       </body>
     </html>
   );
