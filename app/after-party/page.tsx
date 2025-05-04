@@ -1,8 +1,23 @@
 // src/app/after-party/page.tsx
 import { Button } from "@/components/ui/button";
+import type { Metadata } from "next";
 import Image from "next/image";
-import { RsvpDialog } from "./_components/rsvp-dialog";
 // import { AfterPartyForm } from './_components/after-party-form';
+
+export const metadata: Metadata = {
+  title: "Minseon & Frank's After Party",
+  description: "민선 & 프랭크의 애프터 파티에 초대합니다.",
+  openGraph: {
+    images: [
+      {
+        url: "/images/lerici.webp",
+        width: 1200,
+        height: 630,
+        alt: "레리치 아뜰리에",
+      },
+    ],
+  },
+};
 
 export default function AfterPartyPage() {
   const partyDate = "2025년 5월 17일 토요일, 저녁 7시";
@@ -11,11 +26,11 @@ export default function AfterPartyPage() {
     "https://lerici.co/blogs/news/croquis-%EC%8B%9C%EC%9D%B8%EA%B3%BC-%EB%91%90%ED%85%81%EB%B0%94%EC%9C%84-%EC%82%AC%EC%9D%B4%EC%97%90";
 
   return (
-    <div className="relative min-h-screen bg-cover bg-center bg-white  max-w-md mx-auto my-10">
+    <div className="relative min-h-screen bg-cover bg-center bg-white  max-w-md mx-auto my-8">
       {/* Content */}
       <div className="flex flex-col  p-4">
         <div className="mb-4">
-          <h1 className="text-9xl font-bold">Let&apos;s party!</h1>
+          <h1 className="text-8xl font-bold">Let&apos;s party!</h1>
           <h2 className="text-4xl  mt-12">
             Minseon &amp; Frank&apos;s Wedding After Party
           </h2>
@@ -43,10 +58,10 @@ export default function AfterPartyPage() {
             </div>
           </div>
 
-          <div className="mt-8 flex flex-col gap-2">
+          {/* <div className="mt-8 flex flex-col gap-2">
             <span className="text-md">RSVP</span>
             <RsvpDialog />
-          </div>
+          </div> */}
         </div>
 
         <div className="mt-8 w-full space-y-8 ">
