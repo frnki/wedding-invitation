@@ -33,7 +33,8 @@ export default function AfterPartyPage() {
           <h2 className="text-3xl  mt-3">
             Minseon &amp; Frank&apos;s 
           </h2>
-          <h1 className="text-7xl leading-none font-bold">After Party!</h1>
+
+          <h1 className="text-8xl leading-none font-bold">After Party</h1>
           <div className="mt-8 space-y-1 font-normal">
             <p className="text-md">{partyDate}</p>
             <div className="flex items-end gap-1">
