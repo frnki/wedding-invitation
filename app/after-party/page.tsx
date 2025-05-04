@@ -30,7 +30,7 @@ export default function AfterPartyPage() {
       {/* Content */}
       <div className="flex flex-col  p-4">
         <div className="mb-4">
-          <h1 className="text-8xl font-bold">Let&apos;s party!</h1>
+          <h1 className="text-[7rem] leading-none font-bold">Let&apos;s party!</h1>
           <h2 className="text-4xl  mt-12">
             Minseon &amp; Frank&apos;s Wedding After Party
           </h2>
