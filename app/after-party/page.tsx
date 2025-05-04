@@ -30,11 +30,16 @@ export default function AfterPartyPage() {
       {/* Content */}
       <div className="flex flex-col  p-4">
         <div className="mb-4">
-          <h2 className="text-3xl  mt-3">
-            Minseon &amp; Frank&apos;s 
-          </h2>
-
-          <h1 className="text-8xl leading-none font-bold">After Party</h1>
+          <h2 className="text-3xl  mt-2">Minseon &amp; Frank&apos;s</h2>
+          <h1 className="text-8xl leading-none font-bold z-30">After Party</h1>
+          <div className="absolute top-20 right-0 w-1/2 z-20 opacity-40">
+            <Image
+              src="/images/wine.png"
+              alt="After Party"
+              width={512}
+              height={768}
+            />
+          </div>
           <div className="mt-8 space-y-1 font-normal">
             <p className="text-md">{partyDate}</p>
             <div className="flex items-end gap-1">
@@ -54,7 +59,8 @@ export default function AfterPartyPage() {
                   rel="noopener noreferrer"
                 >
                   @Achim.provision
-                </a>)
+                </a>
+                )
               </p>
             </div>
           </div>
