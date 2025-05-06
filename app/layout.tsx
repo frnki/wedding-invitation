@@ -6,11 +6,11 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Minseon & Frank's Wedding",
-  description: "Welcome to our wedding!",
+  description: "민선 & 프랭크의 결혼식에 초대합니다.",
   openGraph: {
     images: ['/images/og-invitation.png'],
     title: "Minseon & Frank's Wedding",
-    description: "Welcome to our wedding!",
+    description: "민선 & 프랭크의 결혼식에 초대합니다.",
   },
 };
 
