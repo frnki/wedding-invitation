@@ -5,8 +5,13 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Minseon & Frank's After Party",
-  description: "Welcome to our after-party!",
+  title: "Minseon & Frank's Wedding",
+  description: "Welcome to our wedding!",
+  openGraph: {
+    images: ['/images/og-invitation.png'],
+    title: "Minseon & Frank's Wedding",
+    description: "Welcome to our wedding!",
+  },
 };
 
 export default function RootLayout({
